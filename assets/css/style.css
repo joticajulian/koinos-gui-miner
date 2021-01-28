@@ -5,6 +5,10 @@ Red: DD003F
 Light Purple: 6F00F6
 Very Deep Purple: 0F091F
 */
+:root {
+  --main1: #0a2519;
+  --main2: #00f6cb;
+}
 
 @font-face {
   font-family: Space-l;
@@ -14,7 +18,7 @@ Very Deep Purple: 0F091F
   -webkit-app-region: no-drag;
 }
 body {
-  background-color: #0f091f;
+  background-color: var(--main1);
   color: #eee;
   font-family: space-l;
   -webkit-app-region: drag;
@@ -74,7 +78,7 @@ a {
 }
 .config input {
   width: 18em;
-  border-bottom: 1px #6f00f6 solid;
+  border-bottom: 1px var(--main2) solid;
   padding: 0.67em;
   color: rgb(196, 196, 196);
   margin-right: 2em;
@@ -85,7 +89,7 @@ a {
 }
 .proof-period input {
   width: 6em;
-  border-bottom: 1px #6f00f6 solid;
+  border-bottom: 1px var(--main2) solid;
   padding: 0.67em;
   color: rgb(196, 196, 196);
   margin-right: 2em;
@@ -103,7 +107,7 @@ a {
   padding-right: 8px;
   text-align: center;
   margin: 2px 0px 10px 0;
-  color: #6f00f6;
+  color: var(--main2);
   font-size: .7em;
 }
 .periods {
@@ -127,12 +131,12 @@ a {
 }
 
 .eth-start input {
-  width: 25em;
-  border-bottom: 1px #6f00f6 solid;
+  width: 15rem;
+  border-bottom: 1px var(--main2) solid;
   padding: 0.67em;
   color: white;
   margin-right: 2em;
-  font-size: 0.8em;
+  font-size: 1.3em;
   text-align: center;
 }
 .eth-start button {
@@ -220,8 +224,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;  
-  margin-top: -160px;
+  align-items: center;
 }
 .spacer {
   height: 40px;
@@ -237,7 +240,7 @@ a {
   position: absolute;
   top: 25em;
   left: 4em;
-  color: #0F091F;
+  color: var(--main1);
 }
 .info {
   position: absolute;
@@ -266,7 +269,7 @@ a {
   position: absolute;
   bottom: 0;
   right: 0;
-  color: #6f00f6;
+  color: var(--main2);
   padding: 2em;
   font-size: 0.8em;
 }
@@ -511,7 +514,7 @@ input[type="checkbox"].check-custom.toggle-switch ~ .check-toggle::after {
   height: 1.25rem;
   margin: 0.125rem;
   border-radius: 50%;
-  background: #0f091f;
+  background: var(--main1);
 }
 
 /* Styles for the ::before pseudo-element of the toggle switch in hover state */
@@ -535,7 +538,7 @@ input[type="checkbox"].check-custom.toggle-switch:focus:checked
 /* Styles for the ::before pseudo-element of the toggle switch in checked or enabled state */
 input[type="checkbox"].check-custom.toggle-switch:checked
   ~ .check-toggle::before {
-  background: #6f00f6;
+  background: var(--main2);
 }
 
 /* Styles for the ::after pseudo-element of the toggle switch in checked or enabled state */
@@ -762,7 +765,7 @@ input[type="checkbox"].check-custom.toggle-switch:checked
 .spinner > div {
   width: 18px;
   height: 18px;
-  background-color: #6F00F6;
+  background-color: var(--main2);
 
   border-radius: 100%;
   display: inline-block;
@@ -797,8 +800,8 @@ input[type="checkbox"].check-custom.toggle-switch:checked
 
 .checked {
   font-size: 4em;
-  background: #6F00F6;
-  color: #0F091F !important;
+  background: var(--main2);
+  color: var(--main1) !important;
 }
 
 input::-webkit-outer-spin-button,
@@ -811,7 +814,7 @@ input::-webkit-inner-spin-button {
   padding: 8px;
   font-size: .6em;
   padding-left: 15px;
-  border: 1px #6F00F6 solid;
+  border: 1px var(--main2) solid;
   border-top-left-radius: 2em;
   border-bottom-left-radius: 2em;
   cursor: pointer; 
@@ -821,7 +824,7 @@ input::-webkit-inner-spin-button {
   padding: 8px;
   padding-right: 15px;
   font-size: .6em;
-  border: 1px #6F00F6 solid;
+  border: 1px var(--main2) solid;
   border-top-right-radius: 2em;
   border-bottom-right-radius: 2em;
   cursor: pointer; 

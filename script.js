@@ -22,7 +22,7 @@ function onStateRestoration(s) {
 
   // Restore configuration
   let config = s.get(Koinos.StateKey.Configuration);
-  document.getElementById(Koinos.Field.EthAddress).value = config.ethAddress;
+  document.getElementById(Koinos.Field.HiveUser).value = config.hiveUser;
   document.getElementById(Koinos.Field.Tip).checked = config.developerTip;
   document.getElementById(Koinos.Field.EthEndpoint).value = config.endpoint;
   document.getElementById(Koinos.Field.ProofFrequency).value = config.proofFrequency;
@@ -196,8 +196,8 @@ function onMinerActivated(state) {
   if (state) {
     document.getElementById(Koinos.Field.Tip).setAttribute("disabled", "true");
     document.getElementById(Koinos.Field.CheckToggle).className += " grayed";
-    document.getElementById(Koinos.Field.EthAddress).setAttribute("disabled", "true");
-    document.getElementById(Koinos.Field.EthAddress).className += " grayed";
+    document.getElementById(Koinos.Field.HiveUser).setAttribute("disabled", "true");
+    document.getElementById(Koinos.Field.HiveUser).className += " grayed";
     document.getElementById(Koinos.Field.EthEndpoint).setAttribute("disabled", "true");
     document.getElementById(Koinos.Field.EthEndpoint).className += " grayed";
     document.getElementById(Koinos.Field.ProofFrequency).setAttribute("disabled", "true");
@@ -209,8 +209,8 @@ function onMinerActivated(state) {
   else {
     document.getElementById(Koinos.Field.Tip).removeAttribute("disabled");
     document.getElementById(Koinos.Field.CheckToggle).classList.remove("grayed");
-    document.getElementById(Koinos.Field.EthAddress).removeAttribute("disabled");
-    document.getElementById(Koinos.Field.EthAddress).classList.remove("grayed");
+    document.getElementById(Koinos.Field.HiveUser).removeAttribute("disabled");
+    document.getElementById(Koinos.Field.HiveUser).classList.remove("grayed");
     document.getElementById(Koinos.Field.EthEndpoint).removeAttribute("disabled");
     document.getElementById(Koinos.Field.EthEndpoint).classList.remove("grayed");
     document.getElementById(Koinos.Field.ProofFrequency).removeAttribute("disabled");
@@ -316,33 +316,9 @@ function isValidEndpoint(endpoint) {
   return (/^(https?|wss?):\/\/[^\s$.?#].[^\s]*$/i.test(endpoint));
 }
 
-function isEthereumAddress(address) {
-  return (/^(0x){1}[0-9a-fA-F]{40}$/i.test(address));
-}
-
 function toggleMiner() {
-  let ethAddress = document.getElementById(Koinos.Field.EthAddress).value;
-  let developerTip = document.getElementById(Koinos.Field.Tip).checked;
-  let endpoint = document.getElementById(Koinos.Field.EthEndpoint).value;
-  let proofPeriod = document.getElementById(Koinos.Field.ProofFrequency).value;
-  let proofPer = getProofPer();
-
-  if (!isEthereumAddress(ethAddress)) {
-    onErrorReport({kMessage: "Please provide a valid Ethereum recipient address."});
-    return;
-  }
-
-  if (!isValidEndpoint(endpoint)) {
-    onErrorReport({kMessage: "Please provide a valid endpoint."});
-    return;
-  }
-
-  if (proofPeriod <= 0) {
-    onErrorReport({kMessage: "Please provide a valid proof frequency."});
-    return;
-  }
-
-  ipcRenderer.invoke(Koinos.StateKey.ToggleMiner, ethAddress, endpoint, developerTip, proofPeriod, proofPer);
+  let hiveUser = document.getElementById(Koinos.Field.HiveUser).value;
+  ipcRenderer.invoke(Koinos.StateKey.ToggleMiner, hiveUser);
 }
 
 ipcRenderer.on(Koinos.StateKey.RestoreState, (event, arg) => {

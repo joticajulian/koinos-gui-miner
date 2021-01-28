@@ -56,7 +56,7 @@ module.exports = {
     Overlay: "overlay",
     Countdown: "countdown",
     CheckToggle: "check-toggle",
-    EthAddress: "eth-address",
+    HiveUser: "hive-user",
     EthEndpoint: "eth-endpoint",
     CircleGlow: "circle-glow",
     ProofFrequency: "proof-frequency",
