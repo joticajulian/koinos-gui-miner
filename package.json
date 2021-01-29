@@ -35,6 +35,7 @@
     "ethereum-qr-code": "^0.3.0",
     "ethereumjs-tx": "^2.1.2",
     "koinos-miner": "https://github.com/joticajulian/koinos-miner.git",
+    "sscjs": "0.0.8",
     "web3": "^1.2.11"
   },
   "resolutions": {

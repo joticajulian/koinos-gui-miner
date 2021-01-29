@@ -7,9 +7,11 @@ let KoinosMiner = require('koinos-miner');
 let { Looper } = require("koinos-miner/looper.js");
 let Retry = require("koinos-miner/retry.js");
 const { assert } = require("console");
+const SSC = require('sscjs');
 let miner = null;
 let mainWindow = null;
 
+const ssc = new SSC('https://api.hive-engine.com/rpc/');
 const configFile = path.join((electron.app || electron.remote.app).getPath('userData'), 'config.json');
 
 let state = new Map([
@@ -51,8 +53,8 @@ function writeConfiguration() {
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 900,
-    height: 660,
+    width: 1200,
+    height: 600,
     icon: path.join(__dirname, process.platform === "win32" ? 'assets/icons/win/icon.ico' : 'assets/icons/png/64x64.png'),
     titleBarStyle: "hidden",
     resizable: false,
@@ -122,12 +124,12 @@ function hashrateCallback(hashrate) {
 }
 
 async function updateTokenBalance() {
-  // TODO 
-  return;
-
    try {
-      let result = await tokenContract.methods.balanceOf(config.ethAddress).call({});
-      notify(Koinos.StateKey.KoinBalanceUpdate, result);
+      const result = await ssc.findOne('tokens','balances', {
+         account: config.hiveUser,
+         symbol: "WKOIN",
+      });
+      notify(Koinos.StateKey.KoinBalanceUpdate, result.balance);
    }
    catch(err) {
       let error = {
@@ -154,9 +156,17 @@ function guiUpdateBlockchainError(e) {
 }
 
 function proofCallback(wkoin, totalToday) {
-  updateTokenBalance();
+  console.log(`
+[JS](app.js) ***************************************************
+             CONGRATULATIONS @${config.hiveUser}!
+             You earned ${wkoin.toFixed(8)} WKOINS
 
-  // TODO: notify with some message
+             Total earned in the last 24h: ${totalToday.toFixed(8)} WKOINS
+             ***************************************************
+`)
+  notify(Koinos.StateKey.WarningReport, {
+    kMessage: `Congratulations! you earned ${wkoin.toFixed(8)} WKOIN. In the last 24h: ${totalToday.toFixed(8)} WKOIN`
+  });
 }
 
 function errorCallback(error) {

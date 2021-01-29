@@ -230,16 +230,7 @@ function onMinerActivated(state) {
 }
 
 function onKoinBalanceUpdate(balance) {
-  let result = "0.0";
-  if (balance != 0) {
-    const decimalPlaces = 8;
-    result = (balance / (10 ** decimalPlaces)).toString();
-    if (balance > (10 ** decimalPlaces)) {
-      let parts = result.split(".");
-      result = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "." + parts[1].substr(0, 3);
-    }
-  }
-  document.getElementById(Koinos.Field.KoinBalance).innerHTML = result;
+  document.getElementById(Koinos.Field.KoinBalance).innerHTML = balance;
 }
 
 function now() {
